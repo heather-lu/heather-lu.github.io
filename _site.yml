@@ -10,8 +10,8 @@ navbar:
       href: resume.html
     - text: "About"
       href: about.html
-    - text: "flexdashboard"
-      href: dashboard_template.html
+    - text: "Dashboard"
+      href: dashboard_template.html 
     - icon: fa-github       
       href: "https://github.com/heather-lu"
     - icon: fa-linkedin      
