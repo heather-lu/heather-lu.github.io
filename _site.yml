@@ -10,6 +10,8 @@ navbar:
       href: resume.html
     - text: "About"
       href: about.html
+    - text: "Instacart flexdashboard"
+      href: instacart_dashboard.html
   right:
     - icon: fa-github       
       href: "https://github.com/heather-lu"

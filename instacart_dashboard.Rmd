@@ -1,10 +1,10 @@
 ---
-title: "Instacart Dashboard"
+title: "Instacart Flexdashboard"
 author: "Heather Lu"
 date: "2025-10-29"
 output:
   flexdashboard::flex_dashboard:
-    orientation: rows
+    orientation: columns
     vertical_layout: fill
 ---
 
@@ -37,7 +37,7 @@ top_aisles <- insta |>
   pull(aisle)
 ```
 
-Orders by Day of Week (Bar) {data-height=360}
+Orders by Day of Week (Bar) {data-width=650}
 -----------------------------------------------------------------------
 
 ```{r}
@@ -48,7 +48,7 @@ layout(xaxis = list(title = "Day of week"),
 yaxis = list(title = "Number of orders"))
 ```
 
-Orders by hour of day (Line plot) {data-height=420}
+Orders by hour of day (Line plot) {data-width=350}
 -----------------------------------------------------------------------
 ```{r}
 insta |>
@@ -61,7 +61,7 @@ insta |>
          yaxis = list(title = "Number of order lines"))
 ```
 
-Days since prior order (histogram) {data-height=420}
+Days since prior order (histogram) {data-width=350}
 -----------------------------------------------------------------------
 ```{r}
 insta |>

@@ -2,7 +2,9 @@
 title: "About Me"
 output:
   html_document:
-    toc: false
+    toc: true
+    toc_float: true
+    theme: flatly
 ---
 
 Hi! I'm Heather — a graduate student in biostatistics in New York City.  

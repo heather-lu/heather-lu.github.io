@@ -2,8 +2,9 @@
 title: "Hi, I'm Heather"
 output:
   html_document:
+    toc: true
+    toc_float: true
     theme: flatly
-    toc: false
 ---
 
 Welcome to my page! I'm a biostatistics student at Columbia University interested in clinical trials, public health analytics, and reproducible research.

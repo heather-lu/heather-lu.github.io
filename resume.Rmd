@@ -2,9 +2,9 @@
 title: "Resume"
 output:
   html_document:
-    theme: flatly
     toc: true
-    toc_depth: 2
+    toc_float: true
+    theme: flatly
 ---
 
 # Heather Lu
