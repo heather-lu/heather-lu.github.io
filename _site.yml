@@ -8,6 +8,8 @@ navbar:
       href: index.html
     - text: "Résumé"
       href: resume.html
+    - text: "About"
+      href: about.html
   right:
     - icon: fa-github       
       href: "https://github.com/heather-lu"

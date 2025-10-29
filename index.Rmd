@@ -13,6 +13,8 @@ Welcome to my page! I'm a biostatistics student at Columbia University intereste
 
 ### What you'll find here
 - Short intro and links to my profiles
-- A **Résumé** page with academic/professional experience
+- A **Resume** page with academic/professional experience
+
+![](https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3b3Y2bnR3cnJkanVqaGFkNHBhNXBnNjJvczA1Y3ltNXY4bHhmNjdhdCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/QYkX9IMHthYn0Y3pcG/giphy.gif)
 
 If you’d like to chat or collaborate, reach me at **hl3978@cumc.columbia.edu** or via the links in the top-right.

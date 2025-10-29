@@ -1,0 +1,19 @@
+---
+title: "About Me"
+output:
+  html_document:
+    toc: false
+---
+
+Hi! I'm Heather — a graduate student in biostatistics in New York City.  
+I was born in **Toronto**, grew up in **Shanghai**, did my undergrad in **Vancouver**, and moved to **New York** for my master's.
+
+![](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWh5MnVtZjNuaDh3aHBuM3Q4ODAyb3dyOGw1NnBwMGtiZzhvaWtjeCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/scZPhLqaVOM1qG4lT9/giphy.gif)
+
+
+Outside of school and work, you'll probably find me:
+
+- **baking** something sweet
+- **gaming** with friends
+- belting out **karaoke**
+- looking at cat gifs
