@@ -1,0 +1,80 @@
+---
+title: "Résumé"
+output:
+  html_document:
+    theme: flatly
+    toc: true
+    toc_depth: 2
+---
+
+# Heather Lu
+
+New York, New York • +1 609-582-6358 • [hl3978@cumc.columbia.edu](mailto:hl3978@cumc.columbia.edu) • [LinkedIn](https://www.linkedin.com/in/heatherlu2001/) • [GitHub](https://github.com/<YOUR_GH_NAME>)
+
+---
+
+## Education
+
+**Columbia University, Mailman School of Public Health** — New York, NY  
+*MSc Candidate, Biostatistics* — *Expected start:* Sept 2025
+
+**University of British Columbia** — Vancouver, BC  
+*BSc in Biochemistry and Statistics* — GPA: 85% (Approx. U.S. GPA: 3.9)  
+*Sept 2020 – May 2025*
+
+---
+
+## Work Experience
+
+**Cytiva** — Vancouver, BC  
+*Nanoparticle Formulations Co-op* — May 2024 – Dec 2024  
+
+- Executed optimization studies on lipid nanoparticle structures, increasing delivery efficiency.  
+- Coordinated the transition of preclinical formulation testing from lab scale to production scale, identifying areas for improvement and implementing changes that reduced costs and turnaround time.  
+- Analyzed formulation experiment data, leading to the discovery of a new formulation approach.
+
+**WuXi AppTec** — Wuxi, China  
+*Biotechnology Intern* — May 2021 – Aug 2021  
+
+- Conducted ELISA assays to detect host cell protein (HCP) in plasmid samples derived from *E. coli*; performed gel electrophoresis to determine yield and purity of DNA isolations for leukemia patient samples.  
+- Optimized DNA isolation protocols for leukemia patient samples, improving yield and purity.  
+- Prepared chemical buffers and biological samples for accurate downstream analyses while maintaining strict safety protocols.
+
+**Columbia Health Clinic** — Shanghai, China  
+*Receptionist & Clinic Assistant* — Apr 2022 – Aug 2022 
+
+- Improved patient satisfaction by providing comprehensive phone assistance as a receptionist.  
+- Streamlined the check-in process, contributing to efficient patient flow and reduced wait times.
+
+---
+
+## Projects
+
+**American Statistical Association (ASA) DataFest — WiDS UBC** — Vancouver, BC  
+*Mar 2024 – Apr 2024*  
+
+- Analyzed educational datasets using R and Python to uncover learning trends, identifying a ~15% improvement in student engagement linked to specific content modules.  
+- Developed logistic-regression models to pinpoint areas for CourseKata platform enhancements.  
+- Collaborated in a multidisciplinary team and presented findings to judges, earning recognition for actionable strategies to improve student outcomes.
+
+**Real Estate Valuation Analysis — University of British Columbia** — Vancouver, BC  
+*Sept 2023 – Dec 2023*  
+
+- Engineered a multivariable regression model to assess factors influencing housing prices, identifying proximity to public transportation as a key driver.  
+- Automated model-selection workflows in R to improve analysis efficiency.  
+- Wrote a formal report with data-driven insights for real estate investments in Taiwan.
+
+**Telemedicine Trends and Accessibility — University of British Columbia** — Vancouver, BC  
+*Jan 2025 – May 2025*  
+
+- Explored disparities in telemedicine access across urban and rural U.S. populations using Medicare/government datasets.  
+- Conducted statistical analysis and visualization to identify demographic and geographic patterns in telehealth usage.  
+- Used SQL and Python to clean, merge, and analyze CMS and NCHS datasets, addressing differences in data type and granularity.  
+- Collaborated with a research team to assess public-health implications of digital healthcare adoption post-pandemic.
+
+---
+
+## Skills
+
+**Statistical & Analytical:** Experimental Design, Hypothesis Testing, Data Analysis & Visualization, Statistical Modeling  
+**Software & Tools:** R; Python (pandas, scikit-learn, Matplotlib); SQL; Databases (MongoDB); Git/GitHub
