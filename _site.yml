@@ -1,14 +1,24 @@
-name: "Yay internet!"
+name: "heather-website"
 output_dir: "."
+
 navbar:
-  title: "Home"
+  title: "Heather Lu"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Résumé"
+      href: resume.html
   right:
-    - text: "About"
-      href: about.html
-    - icon: fa-envelope fa-lg
-      href: mailto:<you@youremail.com>
-    - icon: fa-github fa-lg
-      href: http://github.com/<YOUR_GH_NAME>/
+    - icon: fa-github       
+      href: "https://github.com/heather-lu"
+    - icon: fa-linkedin      
+      href: "https://www.linkedin.com/in/heatherlu2001/"
+    - icon: fa-envelope
+      href: "mailto:hl3978@cumc.columbia.edu"
+
 output:
   html_document:
-    theme: cerulean
+    theme: flatly
+    highlight: textmate
+    toc: false
+    df_print: paged
