@@ -1,472 +1,411 @@
-<!DOCTYPE html>
-
-<html>
-
+<!doctype html>
+<html lang="en">
 <head>
-
-<meta charset="utf-8" />
-<meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
-
-
-
-
-<title>Hi, I’m Heather</title>
-
-<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
-<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
-<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<style>h1 {font-size: 34px;}
-       h1.title {font-size: 38px;}
-       h2 {font-size: 30px;}
-       h3 {font-size: 24px;}
-       h4 {font-size: 18px;}
-       h5 {font-size: 16px;}
-       h6 {font-size: 12px;}
-       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
-       pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
-<script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
-
-<style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
-
-<style type="text/css">code{white-space: pre;}</style>
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heather Lu</title>
+<meta name="description" content="Heather Lu, biostatistics master's student at Columbia University. Prediction modeling, survival analysis, and reproducible research in R and Python.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #FCFAF7;
+  --panel: #F5EFE8;
+  --ink: #2A2230;
+  --ink-2: #5A5060;
+  --muted: #7A7080;
+  --rule: #E6DED6;
+  --link: #1D6B66;
+  --link-hover: #144F4B;
+  --mark: #D9922E;
+  --mark-quiet: #CFC6BE;
+  --focus: #1D6B66;
+  --serif: "Literata", Georgia, "Times New Roman", serif;
+  --sans: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --measure: 38rem;
+  --wide: 56rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #1D1820; --panel: #262029; --ink: #EFE8E4; --ink-2: #C9BFC6; --muted: #A69CA6;
+    --rule: #3A3240; --link: #6CC2B9; --link-hover: #93D6CE; --mark: #E8A84A; --mark-quiet: #574E5A; --focus: #6CC2B9;
   }
 }
-</script>
-
-
-
-
-
-
-
-
-
-<style type = "text/css">
-.main-container {
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
+:root[data-theme="dark"] {
+  --paper: #1D1820; --panel: #262029; --ink: #EFE8E4; --ink-2: #C9BFC6; --muted: #A69CA6;
+  --rule: #3A3240; --link: #6CC2B9; --link-hover: #93D6CE; --mark: #E8A84A; --mark-quiet: #574E5A; --focus: #6CC2B9;
 }
-img {
-  max-width:100%;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--serif); font-size: 1.0625rem; line-height: 1.65;
+  font-optical-sizing: auto; text-rendering: optimizeLegibility;
 }
-.tabbed-pane {
-  padding-top: 12px;
+a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+p { margin: 0 0 1em; }
+
+.wrap { max-width: var(--wide); margin: 0 auto; padding: 0 1rem; }
+@media (min-width: 640px) { .wrap { padding: 0 2rem; } }
+
+/* Nav */
+.site-nav { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 1.5rem 0; font-family: var(--sans); font-size: 0.9rem; }
+.site-nav .home { color: var(--ink); text-decoration: none; font-weight: 600; white-space: nowrap; }
+.site-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
+.site-nav ul a { color: var(--ink-2); text-decoration: none; }
+.site-nav ul a:hover { color: var(--link); text-decoration: underline; }
+
+/* Hero */
+.hero { position: relative; padding: 3.5rem 0 3rem; }
+.hero h1 { font-size: clamp(2.75rem, 8vw, 4.75rem); font-weight: 500; line-height: 1.02; letter-spacing: -0.02em; margin: 0 0 1.25rem; }
+.hero .lede { font-size: clamp(1.2rem, 2.4vw, 1.45rem); line-height: 1.45; max-width: 32rem; color: var(--ink); margin-bottom: 1.25rem; }
+.hero .sub { max-width: var(--measure); color: var(--ink-2); }
+.contact-links { font-family: var(--sans); font-size: 0.95rem; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-top: 1.75rem; }
+.km { display: block; width: 100%; height: auto; margin-top: 2.5rem; color: var(--ink); }
+.km .curve { fill: none; stroke: var(--link); stroke-width: 2; stroke-linejoin: miter; }
+.km .cens { stroke: var(--link); stroke-width: 2; }
+.km .base { stroke: var(--rule); stroke-width: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .km .curve { stroke-dasharray: 1400; stroke-dashoffset: 1400; animation: draw 2.4s cubic-bezier(.45,.05,.3,1) .3s forwards; }
+  .km .cens { opacity: 0; animation: appear .3s ease-out forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes appear { to { opacity: 1; } }
 }
-.html-widget {
-  margin-bottom: 20px;
-}
-button.code-folding-btn:focus {
-  outline: none;
-}
-summary {
-  display: list-item;
-}
-details > summary > p:only-child {
-  display: inline;
-}
-pre code {
-  padding: 0;
-}
+
+/* Sections */
+section { padding: 3.5rem 0; border-top: 1px solid var(--rule); }
+h2 { font-size: 1.75rem; font-weight: 500; line-height: 1.2; letter-spacing: -0.01em; margin: 0 0 0.5rem; }
+.section-intro { color: var(--ink-2); max-width: var(--measure); margin-bottom: 2.5rem; }
+h3 { font-size: 1.3rem; font-weight: 600; line-height: 1.3; margin: 0 0 0.35rem; }
+.meta { font-family: var(--sans); font-size: 0.85rem; color: var(--muted); margin: 0 0 1rem; }
+
+/* Projects */
+.project { display: grid; gap: 1.75rem; padding: 2rem 0; }
+.project + .project { border-top: 1px solid var(--rule); }
+@media (min-width: 820px) { .project.lead { grid-template-columns: minmax(0, 1fr) 21rem; gap: 3rem; align-items: start; } }
+.project .body p { max-width: var(--measure); }
+.project .finding { font-size: 1.15rem; line-height: 1.5; }
+.project-links { font-family: var(--sans); font-size: 0.9rem; display: flex; flex-wrap: wrap; gap: 0.4rem 1.25rem; margin-top: 0.75rem; }
+
+figure.chart { margin: 0; background: var(--panel); border-radius: 6px; padding: 1.25rem 1.25rem 1rem; }
+figure.chart figcaption { font-family: var(--sans); font-size: 0.8rem; line-height: 1.45; color: var(--ink-2); }
+figure.chart .chart-title { font-family: var(--sans); font-size: 0.9rem; font-weight: 600; color: var(--ink); margin: 0 0 0.75rem; }
+figure.chart svg { display: block; width: 100%; height: auto; overflow: visible; font-family: var(--sans); }
+.chart text { fill: var(--ink-2); font-size: 12px; }
+.chart text.val { fill: var(--ink); font-weight: 600; }
+.chart .grid { stroke: var(--rule); stroke-width: 1; }
+.chart .axis { stroke: var(--muted); stroke-width: 1; }
+.chart .dot { fill: var(--mark-quiet); stroke: var(--panel); stroke-width: 2; }
+.chart .dot.on { fill: var(--mark); }
+.chart .bar { fill: var(--mark-quiet); }
+.chart .bar.on { fill: var(--mark); }
+.chart .hit { fill: transparent; }
+.chart g.datum:hover .dot, .chart g.datum:hover .bar { stroke: var(--ink); stroke-width: 1.5; }
+.chart-table { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.more { display: grid; gap: 1.5rem; margin-top: 1rem; }
+@media (min-width: 640px) { .more { grid-template-columns: 1fr 1fr; gap: 2.5rem; } }
+.more h4 { font-size: 1.05rem; font-weight: 600; margin: 0 0 0.25rem; }
+.more p { color: var(--ink-2); font-size: 0.98rem; margin-bottom: 0.4rem; }
+
+/* Timeline */
+.timeline { list-style: none; margin: 0; padding: 0; }
+.timeline > li { display: grid; gap: 0.25rem; padding: 1.5rem 0; }
+.timeline > li + li { border-top: 1px solid var(--rule); }
+@media (min-width: 720px) { .timeline > li { grid-template-columns: 10rem minmax(0, 1fr); gap: 2rem; } }
+.timeline .when { font-family: var(--sans); font-size: 0.85rem; color: var(--muted); padding-top: 0.3rem; }
+.timeline h3 { font-size: 1.15rem; }
+.timeline .where { color: var(--ink-2); font-style: italic; margin-bottom: 0.6rem; }
+.timeline ul { margin: 0; padding-left: 1.1rem; max-width: var(--measure); }
+.timeline ul li { margin-bottom: 0.35rem; }
+.timeline ul li::marker { color: var(--muted); }
+
+.cols { display: grid; gap: 2.5rem; }
+@media (min-width: 720px) { .cols { grid-template-columns: 1fr 1fr; gap: 3.5rem; } }
+.cols h3 { font-size: 1.1rem; }
+.cols p { color: var(--ink-2); }
+.edu p { margin-bottom: 0.2em; }
+.edu .item + .item { margin-top: 1.25rem; }
+
+.about p { max-width: var(--measure); }
+
+footer { border-top: 1px solid var(--rule); padding: 2.5rem 0 3.5rem; font-family: var(--sans); font-size: 0.9rem; color: var(--muted); }
+footer .contact-links { margin-top: 0; margin-bottom: 1rem; }
 </style>
-
-
-<style type="text/css">
-.dropdown-submenu {
-  position: relative;
-}
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
-}
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
-  float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #adb5bd;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
-}
-</style>
-
-<script type="text/javascript">
-// manage active state of menu based on current page
-$(document).ready(function () {
-  // active menu anchor
-  href = window.location.pathname
-  href = href.substr(href.lastIndexOf('/') + 1)
-  if (href === "")
-    href = "index.html";
-  var menuAnchor = $('a[href="' + href + '"]');
-
-  // mark the anchor link active (and if it's in a dropdown, also mark that active)
-  var dropdown = menuAnchor.closest('li.dropdown');
-  if (window.bootstrap) { // Bootstrap 4+
-    menuAnchor.addClass('active');
-    dropdown.find('> .dropdown-toggle').addClass('active');
-  } else { // Bootstrap 3
-    menuAnchor.parent().addClass('active');
-    dropdown.addClass('active');
-  }
-
-  // Navbar adjustments
-  var navHeight = $(".navbar").first().height() + 15;
-  var style = document.createElement('style');
-  var pt = "padding-top: " + navHeight + "px; ";
-  var mt = "margin-top: -" + navHeight + "px; ";
-  var css = "";
-  // offset scroll position for anchor links (for fixed navbar)
-  for (var i = 1; i <= 6; i++) {
-    css += ".section h" + i + "{ " + pt + mt + "}\n";
-  }
-  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
-  document.head.appendChild(style);
-});
-</script>
-
-<!-- tabsets -->
-
-<style type="text/css">
-.tabset-dropdown > .nav-tabs {
-  display: inline-table;
-  max-height: 500px;
-  min-height: 44px;
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "\e259";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "\e258";
-  font-family: 'Glyphicons Halflings';
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs > li.active {
-  display: block;
-}
-
-.tabset-dropdown > .nav-tabs > li > a,
-.tabset-dropdown > .nav-tabs > li > a:focus,
-.tabset-dropdown > .nav-tabs > li > a:hover {
-  border: none;
-  display: inline-block;
-  border-radius: 4px;
-  background-color: transparent;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
-  display: block;
-  float: none;
-}
-
-.tabset-dropdown > .nav-tabs > li {
-  display: none;
-}
-</style>
-
-<!-- code folding -->
-
-
-
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
-
-
-
 </head>
-
 <body>
+<div class="wrap">
 
+<nav class="site-nav" aria-label="Main">
+  <a class="home" href="#top">Heather Lu</a>
+  <ul>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+</nav>
 
-<div class="container-fluid main-container">
+<header class="hero" id="top">
+  <h1>Heather Lu</h1>
+  <p class="lede">I'm a biostatistics master's student at Columbia. I build prediction models for health data, then check whether they still hold up on new patients.</p>
+  <p class="sub">I'm in the Theory &amp; Methods track at the Mailman School of Public Health. Right now I'm building polygenic risk scores for depression in the van Dijk Lab and TA'ing SQL. Before Columbia, I studied statistics, life sciences, and chemistry at UBC and worked on lipid nanoparticle formulations at Cytiva.</p>
+  <div class="contact-links">
+    <a href="mailto:hl3978@cumc.columbia.edu">hl3978@cumc.columbia.edu</a>
+    <a href="https://github.com/heather-lu">GitHub</a>
+    <a href="https://www.linkedin.com/in/heatherlu2001/">LinkedIn</a>
+  </div>
+  <svg class="km" viewBox="0 0 880 90" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <line class="base" x1="0" y1="88" x2="880" y2="88"/>
+    <path class="curve" d="M0 4 H90 V12 H170 V20 H215 V31 H320 V38 H395 V47 H470 V52 H560 V60 H640 V64 H735 V70 H880"/>
+    <line class="cens" x1="128" y1="7" x2="128" y2="17" style="animation-delay:.9s"/>
+    <line class="cens" x1="270" y1="26" x2="270" y2="36" style="animation-delay:1.3s"/>
+    <line class="cens" x1="512" y1="47" x2="512" y2="57" style="animation-delay:1.8s"/>
+    <line class="cens" x1="690" y1="59" x2="690" y2="69" style="animation-delay:2.2s"/>
+    <line class="cens" x1="820" y1="65" x2="820" y2="75" style="animation-delay:2.5s"/>
+  </svg>
+</header>
 
+<section id="projects" aria-labelledby="projects-h">
+  <h2 id="projects-h">Selected projects</h2>
+  <p class="section-intro">Prediction and survival analysis in R. Each project includes code and a full write-up on GitHub.</p>
 
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
-
-
-
-
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">Heather Lu</a>
+  <article class="project lead">
+    <div class="body">
+      <h3>Predicting COVID-19 illness severity</h3>
+      <p class="meta">Spring 2026, Columbia University, in R</p>
+      <p class="finding">The complex models barely beat a simple one. AdaBoost reached a test AUC of 0.918, while logistic regression reached 0.911.</p>
+      <p>I compared logistic regression, a decision tree, AdaBoost, and a radial-kernel SVM for classifying severe COVID-19 in 1,000 participants, tuning each with 10-fold cross-validation. I turned the final model into an individual risk score. Variable importance and partial dependence plots showed that vaccination status was the strongest predictor. Risk rose sharply once systolic blood pressure passed about 130 mmHg and BMI passed 25.</p>
+      <div class="project-links">
+        <a href="https://github.com/heather-lu/covid-severity-prediction">Code and report on GitHub</a>
+      </div>
     </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="index.html">Home</a>
-</li>
-<li>
-  <a href="resume.html">Resume</a>
-</li>
-<li>
-  <a href="about.html">About</a>
-</li>
-<li>
-  <a href="https://github.com/heather-lu">
-    <span class="fa fa-github"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="https://www.linkedin.com/in/heatherlu2001/">
-    <span class="fa fa-linkedin"></span>
-     
-  </a>
-</li>
-<li>
-  <a href="mailto:hl3978@cumc.columbia.edu">
-    <span class="fa fa-envelope"></span>
-     
-  </a>
-</li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
+    <figure class="chart">
+      <p class="chart-title">Test-set AUC by model</p>
+      <svg viewBox="0 0 300 168" role="img" aria-labelledby="covid-desc">
+        <desc id="covid-desc">Dot plot of test-set AUC: decision tree 0.896, logistic regression 0.911, AdaBoost 0.918, SVM radial 0.918.</desc>
+        <!-- x scale: 0.88 -> 128, 0.93 -> 280 ; 1 unit of 0.01 = 30.4px -->
+        <line class="grid" x1="128" y1="4" x2="128" y2="136"/>
+        <line class="grid" x1="158.4" y1="4" x2="158.4" y2="136"/>
+        <line class="grid" x1="188.8" y1="4" x2="188.8" y2="136"/>
+        <line class="grid" x1="219.2" y1="4" x2="219.2" y2="136"/>
+        <line class="grid" x1="249.6" y1="4" x2="249.6" y2="136"/>
+        <line class="grid" x1="280" y1="4" x2="280" y2="136"/>
+        <text x="128" y="154" text-anchor="middle">0.88</text>
+        <text x="188.8" y="154" text-anchor="middle">0.90</text>
+        <text x="249.6" y="154" text-anchor="middle">0.92</text>
 
-<div id="header">
+        <g class="datum"><title>Decision tree: AUC 0.896</title>
+          <rect class="hit" x="0" y="4" width="300" height="30"/>
+          <text x="0" y="23">Decision tree</text>
+          <circle class="dot" cx="176.6" cy="19" r="6"/>
+          <text class="val" x="188" y="23">0.896</text></g>
+        <g class="datum"><title>Logistic regression: AUC 0.911</title>
+          <rect class="hit" x="0" y="37" width="300" height="30"/>
+          <text x="0" y="56">Logistic regression</text>
+          <circle class="dot" cx="222.2" cy="52" r="6"/>
+          <text class="val" x="233" y="56">0.911</text></g>
+        <g class="datum"><title>AdaBoost (selected on cross-validated AUC): test AUC 0.918</title>
+          <rect class="hit" x="0" y="70" width="300" height="30"/>
+          <text x="0" y="89" style="fill:var(--ink);font-weight:600">AdaBoost</text>
+          <circle class="dot on" cx="243.5" cy="85" r="6"/>
+          <text class="val" x="254" y="89">0.918</text></g>
+        <g class="datum"><title>SVM, radial kernel: AUC 0.918</title>
+          <rect class="hit" x="0" y="103" width="300" height="30"/>
+          <text x="0" y="122">SVM (radial)</text>
+          <circle class="dot" cx="243.5" cy="118" r="6"/>
+          <text class="val" x="254" y="122">0.918</text></g>
+      </svg>
+      <figcaption>Held-out test set, n = 200. AdaBoost was selected on cross-validated AUC. The axis starts at 0.88.</figcaption>
+      <table class="chart-table"><caption>Test-set AUC by model</caption>
+        <tr><th>Model</th><th>AUC</th></tr>
+        <tr><td>Decision tree</td><td>0.896</td></tr><tr><td>Logistic regression</td><td>0.911</td></tr>
+        <tr><td>AdaBoost</td><td>0.918</td></tr><tr><td>SVM (radial)</td><td>0.918</td></tr>
+      </table>
+    </figure>
+  </article>
 
+  <article class="project lead">
+    <div class="body">
+      <h3>Breast cancer progression-free survival across cohorts</h3>
+      <p class="meta">Spring 2026, Columbia University, in R, with Veerapetch Petchger and Clement Li</p>
+      <p class="finding">A model trained on an earlier cohort lost accuracy on a later one. Its prediction error rose by about 21%.</p>
+      <p>We compared six models for log-transformed progression-free survival: OLS, ridge, lasso, elastic net, GAM, and MARS. We used 10-fold cross-validation in a cohort of 2,000 patients. Cross-validation errors were close, so we chose lasso for parsimony and interpretability. We then tested it on a later cohort of 2,000. Along with the drop in accuracy, coefficients for HER2 status, hormonal therapy, and lymph nodes shifted between the two periods.</p>
+      <div class="project-links">
+        <a href="https://github.com/heather-lu/breast-cancer-pfs-prediction">Code and report on GitHub</a>
+      </div>
+    </div>
+    <figure class="chart">
+      <p class="chart-title">Lasso prediction error (RMSE, log-PFS)</p>
+      <svg viewBox="0 0 300 176" role="img" aria-labelledby="pfs-desc">
+        <desc id="pfs-desc">Bar chart of RMSE: earlier-cohort model on its own test set 0.684; earlier-cohort model on the later cohort 0.829; later-cohort model on its own test set 0.667.</desc>
+        <!-- x scale: 0 -> 0, 1.0 -> 300 ; bars from x=0 -->
+        <line class="grid" x1="90" y1="0" x2="90" y2="146"/>
+        <line class="grid" x1="180" y1="0" x2="180" y2="146"/>
+        <line class="grid" x1="270" y1="0" x2="270" y2="146"/>
+        <line class="axis" x1="0" y1="0" x2="0" y2="146"/>
+        <text x="0" y="164" text-anchor="start">0</text>
+        <text x="90" y="164" text-anchor="middle">0.3</text>
+        <text x="180" y="164" text-anchor="middle">0.6</text>
+        <text x="270" y="164" text-anchor="middle">0.9</text>
 
+        <g class="datum"><title>Trained on earlier cohort, tested on earlier-cohort test set (n = 400): RMSE 0.684</title>
+          <rect class="hit" x="0" y="0" width="300" height="46"/>
+          <text x="6" y="14">Earlier model, earlier test set</text>
+          <path class="bar" d="M1 22 H201.3 a4 4 0 0 1 4 4 V36 a4 4 0 0 1 -4 4 H1 Z"/>
+          <text class="val" x="211" y="35">0.684</text></g>
+        <g class="datum"><title>Trained on earlier cohort, tested on full later cohort (n = 2,000): RMSE 0.829</title>
+          <rect class="hit" x="0" y="50" width="300" height="46"/>
+          <text x="6" y="64" style="fill:var(--ink);font-weight:600">Earlier model, later cohort</text>
+          <path class="bar on" d="M1 72 H244.7 a4 4 0 0 1 4 4 V86 a4 4 0 0 1 -4 4 H1 Z"/>
+          <text class="val" x="255" y="85">0.829</text></g>
+        <g class="datum"><title>Trained on later cohort, tested on later-cohort test set (n = 400): RMSE 0.667</title>
+          <rect class="hit" x="0" y="100" width="300" height="46"/>
+          <text x="6" y="114">Later model, later test set</text>
+          <path class="bar" d="M1 122 H196.1 a4 4 0 0 1 4 4 V136 a4 4 0 0 1 -4 4 H1 Z"/>
+          <text class="val" x="206" y="135">0.667</text></g>
+      </svg>
+      <figcaption>Lower is better. The later-cohort evaluations use different samples, so they aren't a paired comparison.</figcaption>
+      <table class="chart-table"><caption>Lasso RMSE on log-PFS scale</caption>
+        <tr><th>Training data</th><th>Evaluation data</th><th>RMSE</th></tr>
+        <tr><td>Earlier cohort</td><td>Earlier-cohort test set (n = 400)</td><td>0.684</td></tr>
+        <tr><td>Earlier cohort</td><td>Full later cohort (n = 2,000)</td><td>0.829</td></tr>
+        <tr><td>Later cohort</td><td>Later-cohort test set (n = 400)</td><td>0.667</td></tr>
+      </table>
+    </figure>
+  </article>
 
-<h1 class="title toc-ignore">Hi, I’m Heather</h1>
+  <article class="project">
+    <div class="body">
+      <h3>Breast cancer outcomes and protein biomarkers</h3>
+      <p class="meta">Fall 2025, Columbia University, in R, group project for Data Science I</p>
+      <p>Do clinical characteristics and four protein biomarkers predict vital status in 334 surgically treated breast cancer patients? I fit multivariable logistic regression and checked discrimination with ROC/AUC across five Monte Carlo train/test splits. I also estimated Kaplan–Meier curves by tumor stage and HER2 status for 317 eligible patients. The evidence was limited, and I report it that way: the cohort was small, there were few deaths, and the subgroups were uneven.</p>
+      <div class="project-links">
+        <a href="https://github.com/heather-lu/breast-cancer-outcomes-prediction">Code on GitHub</a>
+        <a href="https://vp2587.github.io/p8105_final/">Project website</a>
+      </div>
+    </div>
+  </article>
+
+  <div class="more">
+    <div>
+      <h4>Learning analytics at NYU Langone</h4>
+      <p>Mixed-effects models of medical students' platform engagement and exam outcomes. Presented at the IIME Project Showcase, August 2026.</p>
+    </div>
+    <div>
+      <h4>Instacart dashboard</h4>
+      <p>An interactive flexdashboard of grocery orders built with plotly in R.</p>
+      <p><a href="dashboard_template.html">Open the dashboard</a></p>
+    </div>
+  </div>
+</section>
+
+<section id="experience" aria-labelledby="experience-h">
+  <h2 id="experience-h">Research and work</h2>
+  <p class="section-intro">Statistical genetics, medical education research, teaching, and a year in the lab before that.</p>
+  <ol class="timeline" reversed>
+    <li>
+      <div class="when">Sep 2026 – now</div>
+      <div>
+        <h3>Graduate Student Researcher</h3>
+        <p class="where">Columbia University, Department of Psychiatry, van Dijk Lab</p>
+        <ul>
+          <li>Building a reproducible PRS-CSx pipeline for depression polygenic risk scores in the ancestrally diverse ABCD Study. It combines multi-ancestry GWAS summary statistics with ancestry-specific LD reference panels.</li>
+          <li>Running GWAS quality control in R: allele frequency filtering, removing strand-ambiguous SNPs and indels, and handling missing SNP identifiers.</li>
+          <li>Designed comparisons of PRS-CSx against LDpred2 and P+T scores, with external validation in the lab's multigenerational high-risk depression cohort.</li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <div class="when">Sep 2026 – now</div>
+      <div>
+        <h3>Teaching Assistant, Relational Databases and SQL (P8180)</h3>
+        <p class="where">Columbia University, Department of Biostatistics</p>
+        <ul>
+          <li>Hold office hours, and grade quizzes and midterms on SQL queries and database concepts.</li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <div class="when">Aug 2026 – now</div>
+      <div>
+        <h3>Volunteer Research Assistant</h3>
+        <p class="where">NYU Grossman School of Medicine</p>
+        <ul>
+          <li>Coauthoring a manuscript with Dr. Jesse Burk-Rafel on end-of-residency competency ratings and where family medicine graduates go on to practice, including rural and underserved areas.</li>
+          <li>Writing the Methods from the statistical workflow and drafting the manuscript under STROBE guidelines.</li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <div class="when">Jun – Aug 2026</div>
+      <div>
+        <h3>Data Analyst Intern</h3>
+        <p class="where">NYU Grossman School of Medicine, Institute for Innovations in Medical Education</p>
+        <ul>
+          <li>Linked learning-platform engagement to exam records across two medical student cohorts. Used adjusted regression and mixed-effects models to test whether early engagement predicted later outcomes.</li>
+          <li>Built a Python pipeline that turns AI-assistant transcripts into message-level data. It's still in use.</li>
+          <li>Analyzed over 5,000 student prompts with TF-IDF, clustering, and rule-based intent classification, and recommended fixes for common failure modes.</li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <div class="when">May – Dec 2024</div>
+      <div>
+        <h3>Nanoparticle Formulations Co-op</h3>
+        <p class="where">Cytiva, Vancouver</p>
+        <ul>
+          <li>Synthesized and characterized lipid nanoparticles (size, PDI, encapsulation efficiency) and analyzed the results for downstream cell-based testing.</li>
+        </ul>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<section id="education" aria-labelledby="education-h">
+  <h2 id="education-h">Education and skills</h2>
+  <div class="cols" style="margin-top:2rem">
+    <div class="edu">
+      <div class="item">
+        <h3>Columbia University, Mailman School of Public Health</h3>
+        <p>MS in Biostatistics, Theory &amp; Methods track</p>
+        <p class="meta">Expected May 2027</p>
+      </div>
+      <div class="item">
+        <h3>University of British Columbia</h3>
+        <p>BSc, combined major in statistics, life sciences, and chemistry. Graduated with distinction.</p>
+        <p class="meta">May 2025</p>
+      </div>
+    </div>
+    <div>
+      <h3>Methods</h3>
+      <p>Survival analysis, longitudinal and mixed-effects models, causal inference, penalized regression, machine learning for classification, polygenic risk scores.</p>
+      <h3>Tools</h3>
+      <p>R (tidyverse, ggplot2, caret, glmnet, Shiny), Python (pandas, scikit-learn), SQL, SAS, Git.</p>
+      <h3>Writing</h3>
+      <p>Burk-Rafel J, <strong>Lu H</strong>, et al. Family medicine competency ratings and rural and MUA/HPSA practice within six years of residency graduation. In preparation.</p>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="about" aria-labelledby="about-h">
+  <h2 id="about-h">About me</h2>
+  <p style="margin-top:1rem">I was born in Toronto, grew up in Shanghai, studied in Vancouver, and now live in New York. When I'm not working with data, I'm usually baking something sweet, gaming with friends, or singing karaoke.</p>
+</section>
+
+<footer>
+  <div class="contact-links">
+    <a href="mailto:hl3978@cumc.columbia.edu">Email me</a>
+    <a href="https://github.com/heather-lu">GitHub</a>
+    <a href="https://www.linkedin.com/in/heatherlu2001/">LinkedIn</a>
+  </div>
+  <p>Heather Lu, 2026</p>
+</footer>
 
 </div>
-
-
-<p>Welcome to my page! I’m a biostatistics student at Columbia
-University interested in clinical trials, public health analytics, and
-reproducible research.</p>
-<ul>
-<li><strong>Currently:</strong> MSc in Biostatistics at Columbia
-University, focusing on statistical methods for clinical trials and
-health data science.<br />
-</li>
-<li><strong>Previously:</strong> BSc in Biochemistry and Statistics from
-the University of British Columbia; Genomic medicine + nanoparticle
-formulations co-op; coursework in statistics, epi, and computing (R,
-Python, SQL).</li>
-</ul>
-<div id="what-youll-find-here" class="section level3">
-<h3>What you’ll find here</h3>
-<ul>
-<li>Short intro and links to my profiles</li>
-<li>A <strong>Resume</strong> page with academic/professional
-experience</li>
-</ul>
-<p><img
-src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3b3Y2bnR3cnJkanVqaGFkNHBhNXBnNjJvczA1Y3ltNXY4bHhmNjdhdCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/QYkX9IMHthYn0Y3pcG/giphy.gif" /></p>
-<p>If you’d like to chat or collaborate, reach me at <strong><a
-href="mailto:hl3978@cumc.columbia.edu"
-class="email">hl3978@cumc.columbia.edu</a></strong> or via the links in
-the top-right.</p>
-</div>
-
-
-
-</div>
-</div>
-
-</div>
-
-<script>
-
-// add bootstrap table styles to pandoc tables
-function bootstrapStylePandocTables() {
-  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
-}
-$(document).ready(function () {
-  bootstrapStylePandocTables();
-});
-
-
-</script>
-
-<!-- tabsets -->
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open');
-  });
-});
-</script>
-
-<!-- code folding -->
-
-<script>
-$(document).ready(function ()  {
-
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
-
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
-
 </body>
 </html>
