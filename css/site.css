@@ -89,7 +89,7 @@ figure.chart { margin: 0; background: var(--panel); border-radius: 6px; padding:
 figure.chart figcaption { font-family: var(--sans); font-size: 0.8rem; line-height: 1.45; color: var(--ink-2); }
 figure.chart .chart-title { font-family: var(--sans); font-size: 0.9rem; font-weight: 600; color: var(--ink); margin: 0 0 0.75rem; }
 figure.chart svg { display: block; width: 100%; height: auto; overflow: visible; font-family: var(--sans); }
-.chart text { fill: var(--ink-2); font-size: 12px; }
+.chart text { fill: var(--ink-2); font-size: 12px; paint-order: stroke; stroke: var(--panel); stroke-width: 3px; stroke-linejoin: round; }
 .chart text.val { fill: var(--ink); font-weight: 600; }
 .chart .grid { stroke: var(--rule); stroke-width: 1; }
 .chart .axis { stroke: var(--muted); stroke-width: 1; }
@@ -169,3 +169,13 @@ footer .contact-links { margin-top: 0; margin-bottom: 1rem; }
   padding: 0.45rem 0.6rem; border-radius: 4px; box-shadow: 0 2px 8px rgba(15, 36, 64, 0.18);
 }
 .chart-fallback { font-family: var(--sans); font-size: 0.9rem; color: var(--ink-2); margin: 0; }
+
+/* PFS coefficient chart */
+.chart-grid .span-2 { grid-column: 1 / -1; }
+.chart .zero { stroke: var(--ink-2); stroke-width: 1.5; }
+.chart .coef-track { stroke: var(--quiet); stroke-width: 2; opacity: 0.6; }
+.chart .coef-ghost { fill: none; stroke: var(--quiet); stroke-width: 1.5; }
+.chart .coef-dot { fill: var(--quiet); stroke: var(--panel); stroke-width: 2; }
+.chart .coef-dot.on { fill: var(--hi); }
+.chart .coef-dot, .chart .coef-ghost { transition: transform 600ms cubic-bezier(.3,.7,.3,1); }
+@media (prefers-reduced-motion: reduce) { .chart .coef-dot, .chart .coef-ghost { transition: none; } }

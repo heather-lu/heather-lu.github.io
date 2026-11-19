@@ -65,7 +65,7 @@
     </div>
   </article>
 
-  <article class="project lead">
+  <article class="project wide" id="pfs">
     <div class="body">
       <h3>Breast cancer progression-free survival across cohorts</h3>
       <p class="meta">Spring 2026, Columbia University, in R, with Veerapetch Petchger and Clement Li</p>
@@ -75,44 +75,11 @@
         <a href="https://github.com/heather-lu/breast-cancer-pfs-prediction">Code and report on GitHub</a>
       </div>
     </div>
-    <figure class="chart">
-      <p class="chart-title">Lasso prediction error (RMSE, log-PFS)</p>
-      <svg viewBox="0 0 300 176" role="img" aria-labelledby="pfs-desc">
-        <desc id="pfs-desc">Bar chart of RMSE: earlier-cohort model on its own test set 0.684; earlier-cohort model on the later cohort 0.829; later-cohort model on its own test set 0.667.</desc>
-        <!-- x scale: 0 -> 0, 1.0 -> 300 ; bars from x=0 -->
-        <line class="grid" x1="90" y1="0" x2="90" y2="146"/>
-        <line class="grid" x1="180" y1="0" x2="180" y2="146"/>
-        <line class="grid" x1="270" y1="0" x2="270" y2="146"/>
-        <line class="axis" x1="0" y1="0" x2="0" y2="146"/>
-        <text x="0" y="164" text-anchor="start">0</text>
-        <text x="90" y="164" text-anchor="middle">0.3</text>
-        <text x="180" y="164" text-anchor="middle">0.6</text>
-        <text x="270" y="164" text-anchor="middle">0.9</text>
-
-        <g class="datum"><title>Trained on earlier cohort, tested on earlier-cohort test set (n = 400): RMSE 0.684</title>
-          <rect class="hit" x="0" y="0" width="300" height="46"/>
-          <text x="6" y="14">Earlier model, earlier test set</text>
-          <path class="bar" d="M1 22 H201.3 a4 4 0 0 1 4 4 V36 a4 4 0 0 1 -4 4 H1 Z"/>
-          <text class="val" x="211" y="35">0.684</text></g>
-        <g class="datum"><title>Trained on earlier cohort, tested on full later cohort (n = 2,000): RMSE 0.829</title>
-          <rect class="hit" x="0" y="50" width="300" height="46"/>
-          <text x="6" y="64" style="fill:var(--ink);font-weight:600">Earlier model, later cohort</text>
-          <path class="bar on" d="M1 72 H244.7 a4 4 0 0 1 4 4 V86 a4 4 0 0 1 -4 4 H1 Z"/>
-          <text class="val" x="255" y="85">0.829</text></g>
-        <g class="datum"><title>Trained on later cohort, tested on later-cohort test set (n = 400): RMSE 0.667</title>
-          <rect class="hit" x="0" y="100" width="300" height="46"/>
-          <text x="6" y="114">Later model, later test set</text>
-          <path class="bar" d="M1 122 H196.1 a4 4 0 0 1 4 4 V136 a4 4 0 0 1 -4 4 H1 Z"/>
-          <text class="val" x="206" y="135">0.667</text></g>
-      </svg>
-      <figcaption>Lower is better. The later-cohort evaluations use different samples, so they aren't a paired comparison.</figcaption>
-      <table class="chart-table"><caption>Lasso RMSE on log-PFS scale</caption>
-        <tr><th>Training data</th><th>Evaluation data</th><th>RMSE</th></tr>
-        <tr><td>Earlier cohort</td><td>Earlier-cohort test set (n = 400)</td><td>0.684</td></tr>
-        <tr><td>Earlier cohort</td><td>Full later cohort (n = 2,000)</td><td>0.829</td></tr>
-        <tr><td>Later cohort</td><td>Later-cohort test set (n = 400)</td><td>0.667</td></tr>
-      </table>
-    </figure>
+    <div class="chart-grid">
+      <figure class="chart span-2" id="pfs-coef" data-fallback="Lasso coefficients shifted between cohorts: HER2 went from −0.128 to +0.026 and hormonal therapy from +0.137 to +0.202."></figure>
+      <figure class="chart" id="pfs-cv" data-fallback="10-fold CV RMSE in the earlier cohort ranged from 0.707 (lasso, elastic net, GAM) to 0.710 (OLS)."></figure>
+      <figure class="chart" id="pfs-eval" data-fallback="Lasso RMSE: 0.684 on the earlier test set, 0.829 on the later cohort, 0.667 when refit on the later cohort."></figure>
+    </div>
   </article>
 
   <article class="project">

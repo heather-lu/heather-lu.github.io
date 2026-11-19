@@ -12,8 +12,10 @@ sleep 1
 fail=0
 dump() { "$CHROME" --headless=new --disable-gpu --virtual-time-budget=8000 --window-size=1100,1400 "$@" 2>/dev/null; }
 
-for suite in ${@:-covid}; do
-  out=$(dump --dump-dom "http://127.0.0.1:$PORT/tests/harness.html?suite=$suite" | python3 -I -c '
+for name in ${@:-covid pfs pfs-rm}; do
+  suite=${name%-rm}; flags=()
+  [ "$name" != "$suite" ] && flags=(--force-prefers-reduced-motion)
+  out=$(dump ${flags[@]+"${flags[@]}"} --dump-dom "http://127.0.0.1:$PORT/tests/harness.html?suite=$suite" | python3 -I -c '
 import sys, re, json, html
 m = re.search(r"<pre id=\"results\">(.*?)</pre>", sys.stdin.read(), re.S)
 res = json.loads(html.unescape(m.group(1))) if m and m.group(1).startswith("{") else {"results": "FAIL never written"}
@@ -22,7 +24,7 @@ print(f"{len(res) - len(bad)}/{len(res)} ok")
 for k, v in bad.items(): print(f"  {k}: {v}")
 sys.exit(1 if bad else 0)')
   status=$?
-  echo "[$suite] $out"
+  echo "[$name] $out"
   [ $status -eq 0 ] || fail=1
 done
 [ $fail -eq 0 ] && echo "ALL CHECKS PASSED" || { echo "CHECKS FAILED"; exit 1; }

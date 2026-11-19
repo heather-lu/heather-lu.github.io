@@ -1,9 +1,11 @@
 // Loads each project's chart data and renders it. Each project is independent,
 // so one failed load leaves the others working; failed charts show a text fallback.
 import { renderCovid } from "./charts-covid.js";
+import { renderPfs } from "./charts-pfs.js";
 
 const projects = [
   { data: "data/covid.json", render: renderCovid, mounts: { roc: "covid-roc", cv: "covid-cv", imp: "covid-imp", pdp: "covid-pdp" } },
+  { data: "data/pfs.json", render: renderPfs, mounts: { coef: "pfs-coef", cv: "pfs-cv", eval: "pfs-eval" } },
 ];
 
 function fallback(el, repo) {

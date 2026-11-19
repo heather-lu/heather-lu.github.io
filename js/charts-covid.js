@@ -2,35 +2,10 @@
 // partial dependence. Data: data/covid.json (see analysis/export_covid.R).
 import { scaleLinear, ticks, linePath, stepPath, nearestPoint, svg, text, tooltip,
          centerOf, dataTable, choiceGroup, tabGroup } from "./chartkit.js";
+import { title, caption, axisX, axisY, foldStrip } from "./charts-common.js";
 
 const f3 = (v) => v.toFixed(3);
 const DASH = { glm: "6 4", rpart: "2 4", gbmA: null, svmr: "10 3 2 3" };
-
-function title(fig, str) {
-  const p = document.createElement("p");
-  p.className = "chart-title";
-  p.textContent = str;
-  fig.append(p);
-}
-function caption(fig, str) {
-  const c = document.createElement("figcaption");
-  c.textContent = str;
-  fig.append(c);
-}
-function axisX(g, x, y0, tickVals, fmt, label, width) {
-  for (const t of tickVals) {
-    g.append(svg("line", { class: "grid", x1: x(t), x2: x(t), y1: 0, y2: y0 }));
-    g.append(text(x(t), y0 + 16, fmt(t), { "text-anchor": "middle" }));
-  }
-  if (label) g.append(text(width / 2, y0 + 34, label, { "text-anchor": "middle", class: "axis-label" }));
-}
-function axisY(g, y, x0, tickVals, fmt, label, height, width) {
-  for (const t of tickVals) {
-    g.append(svg("line", { class: "grid", x1: x0, x2: x0 + width, y1: y(t), y2: y(t) }));
-    g.append(text(x0 - 6, y(t) + 4, fmt(t), { "text-anchor": "end" }));
-  }
-  if (label) g.append(text(-height / 2, x0 - 38, label, { "text-anchor": "middle", transform: "rotate(-90)", class: "axis-label" }));
-}
 
 function renderRoc(fig, data) {
   title(fig, "ROC curves on the held-out test set");
@@ -106,37 +81,13 @@ function renderRoc(fig, data) {
 }
 
 function renderCv(fig, data) {
-  title(fig, "AUC in each of the 10 cross-validation folds");
-  const all = data.models.flatMap((m) => m.cv_auc);
-  const lo = Math.floor(Math.min(...all) * 20) / 20, hi = Math.ceil(Math.max(...all) * 20) / 20;
-  const W = 320, rowH = 34, M = { l: 112, r: 12, t: 6, b: 30 };
-  const H = M.t + rowH * data.models.length + M.b, iw = W - M.l - M.r;
-  const x = scaleLinear([lo, hi], [0, iw]);
-  const root = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Fold-by-fold cross-validated AUC for each model" });
-  const g = svg("g", { transform: `translate(${M.l},${M.t})` });
-  root.append(g);
-  axisX(g, x, rowH * data.models.length, ticks(lo, hi, 4), (v) => v.toFixed(2), null, iw);
-  const tip = tooltip();
-  data.models.forEach((m, i) => {
-    const cy = rowH * i + rowH / 2;
-    const sel = m.id === data.selected;
-    const row = svg("g", { class: "datum", tabindex: 0, role: "img",
-      "aria-label": `${m.label}: mean CV AUC ${f3(m.cv_auc_mean)}, folds ${f3(Math.min(...m.cv_auc))} to ${f3(Math.max(...m.cv_auc))}` });
-    row.append(svg("rect", { class: "hit", x: -M.l, y: cy - rowH / 2, width: W, height: rowH }));
-    row.append(text(-M.l, cy + 4, m.label, sel ? { class: "val" } : {}));
-    for (const v of m.cv_auc) row.append(svg("circle", { class: `fold${sel ? " on" : ""}`, cx: x(v), cy, r: 4 }));
-    row.append(svg("line", { class: `mean${sel ? " on" : ""}`, x1: x(m.cv_auc_mean), x2: x(m.cv_auc_mean), y1: cy - 10, y2: cy + 10 }));
-    const show = (cx, cyy) => tip.show(`<strong>${m.label}</strong><br>Mean CV AUC ${f3(m.cv_auc_mean)}<br>Range ${f3(Math.min(...m.cv_auc))}–${f3(Math.max(...m.cv_auc))}`, cx, cyy);
-    row.addEventListener("pointermove", (ev) => show(ev.clientX, ev.clientY));
-    row.addEventListener("focus", () => show(...centerOf(row)));
-    row.addEventListener("pointerleave", () => tip.hide());
-    row.addEventListener("blur", () => tip.hide());
-    g.append(row);
+  foldStrip(fig, {
+    title: "AUC in each of the 10 cross-validation folds",
+    rows: data.models.map((m) => ({ id: m.id, label: m.label, folds: m.cv_auc, mean: m.cv_auc_mean })),
+    selected: data.selected, fmt: f3, metric: "CV AUC", step: 20,
+    caption: "Dots are folds and the tick is the mean. AdaBoost had the highest mean, so it was selected.",
+    tableCaption: "Cross-validated AUC by fold",
   });
-  fig.append(root);
-  caption(fig, "Dots are folds and the tick is the mean. AdaBoost had the highest mean, so it was selected.");
-  fig.append(dataTable("Cross-validated AUC by fold", ["Model", ...data.models[0].cv_auc.map((_, i) => `Fold ${i + 1}`), "Mean"],
-    data.models.map((m) => [m.label, ...m.cv_auc.map(f3), f3(m.cv_auc_mean)])));
 }
 
 function renderImportance(fig, data) {
