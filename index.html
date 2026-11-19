@@ -87,22 +87,6 @@
     </div>
   </article>
 
-  <article class="project wide" id="brca">
-    <div class="body">
-      <h3>Breast cancer outcomes and protein biomarkers</h3>
-      <p class="meta">Fall 2025, Columbia University, in R, group project for Data Science I</p>
-      <p class="finding">Clinical features and four protein biomarkers barely predicted survival status, and survival curves didn't clearly differ by stage or HER2 status.</p>
-      <p>We asked whether clinical characteristics and four protein biomarkers predict vital status in 334 surgically treated breast cancer patients. I fit multivariable logistic regression and checked discrimination across five Monte Carlo train/test splits, where the mean held-out AUC was 0.54. I also estimated Kaplan–Meier curves by tumour stage and HER2 status for 317 eligible patients. Log-rank tests found no clear differences (stage p = 0.10, HER2 p = 0.97). The evidence was limited, and I report it that way: the cohort was small, there were few deaths, and the subgroups were uneven.</p>
-      <div class="project-links">
-        <a href="https://github.com/heather-lu/breast-cancer-outcomes-prediction">Code on GitHub</a>
-        <a href="https://vp2587.github.io/p8105_final/">Project website</a>
-      </div>
-    </div>
-    <div class="chart-grid">
-      <figure class="chart" id="brca-km" data-fallback="Log-rank tests: tumour stage p = 0.10, HER2 status p = 0.97 (317 patients)."></figure>
-      <figure class="chart" id="brca-auc" data-fallback="Mean held-out AUC across five Monte Carlo splits: 0.54."></figure>
-    </div>
-  </article>
 
   <div class="more">
     <div>

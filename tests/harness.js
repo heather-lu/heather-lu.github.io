@@ -84,44 +84,9 @@ const suites = {
     const scale = sv.getBoundingClientRect().width / sv.viewBox.baseVal.width;
     check("coef: readable at phone width (scale >= 0.9)", scale >= 0.9, scale.toFixed(2));
   },
-  async brca() {
-    const { renderBrca } = await import("../js/charts-brca.js");
-    const data = await (await fetch("../data/brca.json")).json();
-    const m = { km: mount("brca-km"), auc: mount("brca-auc") };
-    renderBrca(data, m);
-    const tabs = m.km.querySelectorAll('[role="tab"]');
-    check("km: 3 tabs", tabs.length === 3, tabs.length);
-    const curves = () => m.km.querySelectorAll("path.curve");
-    check("km: overall has 1 curve", curves().length === 1, curves().length);
-    check("km: censor marks match data", m.km.querySelectorAll(".censor").length === data.km.overall.groups[0].censor.length);
-    check("km: no p-value for overall", !/p [=<]/.test(m.km.querySelector(".pval")?.textContent || ""));
-    tabs[1].click();
-    check("km: stage has 3 curves", curves().length === 3, curves().length);
-    check("km: stage emphasizes exactly one", m.km.querySelectorAll("path.curve.on").length === 1);
-    const pick = m.km.querySelectorAll(".choice-group button");
-    check("km: stage has a group picker", pick.length === 3, pick.length);
-    pick[0].click();
-    check("km: picking stage I emphasizes it", m.km.querySelector("path.curve.on")?.dataset.group === data.km.stage.groups[0].name);
-    check("km: stage p-value shown", /p = 0\.10/.test(m.km.querySelector(".pval").textContent), m.km.querySelector(".pval").textContent);
-    check("km: at-risk table has a row per group", m.km.querySelectorAll(".at-risk tr.group").length === 3);
-    tabs[1].dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }));
-    check("km: arrow key moves to HER2", tabs[2].getAttribute("aria-selected") === "true");
-    check("km: HER2 has 2 curves in two blues", curves().length === 2 && m.km.querySelectorAll("path.curve.on").length === 1 && m.km.querySelectorAll("path.curve.on2").length === 1);
-    check("km: HER2 hides the group picker", m.km.querySelectorAll(".choice-group button").length === 0);
-    check("km: HER2 p-value shown", /p = 0\.97/.test(m.km.querySelector(".pval").textContent));
-    tabs[0].click();
-    const kmSvg = m.km.querySelector("svg");
-    const kr = kmSvg.getBoundingClientRect();
-    document.querySelector(".chart-tip").hidden = true;
-    kmSvg.dispatchEvent(new PointerEvent("pointerdown", { clientX: kr.left + kr.width / 2, clientY: kr.top + kr.height / 2, bubbles: true }));
-    check("km: a tap shows a readout", !document.querySelector(".chart-tip").hidden && /Survival/.test(document.querySelector(".chart-tip").textContent));
-    check("auc: 5 split dots", m.auc.querySelectorAll("circle.mc").length === 5);
-    check("auc: chance line", !!m.auc.querySelector("line.chance"));
-    for (const [k, el] of Object.entries(m)) check(`${k}: has data table`, !!el.querySelector("table.chart-table"));
-  },
   async fallback() {
     // Recreate the page's chart mounts, make every data request fail, then run main.js.
-    const ids = ["covid-roc", "covid-cv", "covid-imp", "covid-pdp", "pfs-coef", "pfs-cv", "pfs-eval", "brca-km", "brca-auc"];
+    const ids = ["covid-roc", "covid-cv", "covid-imp", "covid-pdp", "pfs-coef", "pfs-cv", "pfs-eval"];
     const art = document.createElement("article");
     art.innerHTML = `<div class="project-links"><a href="https://github.com/heather-lu/x">Code</a></div>` +
       ids.map((id) => `<figure class="chart" id="${id}" data-fallback="Summary for ${id}."></figure>`).join("");
@@ -146,7 +111,7 @@ const suites = {
       .slice(0, 4).map((el) => `${el.tagName.toLowerCase()}${el.id ? "#" + el.id : ""}.${el.className?.baseVal ?? el.className}`);
     check("phone: no horizontal scroll", d.documentElement.scrollWidth <= 375, `${d.documentElement.scrollWidth} ${wide.join(" ")}`);
     const figs = [...d.querySelectorAll("figure.chart[id]")];
-    check("phone: all 9 charts rendered", figs.length === 9 && figs.every((x) => x.querySelector("svg")), figs.filter((x) => !x.querySelector("svg")).map((x) => x.id).join());
+    check("phone: all 7 charts rendered", figs.length === 7 && figs.every((x) => x.querySelector("svg")), figs.filter((x) => !x.querySelector("svg")).map((x) => x.id).join());
     // A tooltip opened near the right edge stays inside the 375px viewport
     const row = d.querySelector("#covid-cv g.datum");
     row.dispatchEvent(new f.contentWindow.PointerEvent("pointermove", { clientX: 370, clientY: 200, bubbles: true }));

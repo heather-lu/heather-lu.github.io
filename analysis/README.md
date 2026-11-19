@@ -13,7 +13,6 @@ are written out. No patient-level data is ever committed here.
    cd analysis/_src
    git clone https://github.com/heather-lu/covid-severity-prediction.git
    git clone https://github.com/heather-lu/breast-cancer-pfs-prediction.git
-   git clone https://github.com/heather-lu/breast-cancer-outcomes-prediction.git
    ```
 
 2. Copy the COVID dataset (not public) to
@@ -24,7 +23,6 @@ are written out. No patient-level data is ever committed here.
    ```sh
    Rscript analysis/export_covid.R
    Rscript analysis/export_pfs.R
-   Rscript analysis/export_brca.R
    ```
 
 Each script checks its headline numbers against the published reports and

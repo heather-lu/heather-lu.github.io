@@ -2,12 +2,10 @@
 // so one failed load leaves the others working; failed charts show a text fallback.
 import { renderCovid } from "./charts-covid.js";
 import { renderPfs } from "./charts-pfs.js";
-import { renderBrca } from "./charts-brca.js";
 
 const projects = [
   { data: "data/covid.json", render: renderCovid, mounts: { roc: "covid-roc", cv: "covid-cv", imp: "covid-imp", pdp: "covid-pdp" } },
   { data: "data/pfs.json", render: renderPfs, mounts: { coef: "pfs-coef", cv: "pfs-cv", eval: "pfs-eval" } },
-  { data: "data/brca.json", render: renderBrca, mounts: { km: "brca-km", auc: "brca-auc" } },
 ];
 
 function fallback(el, repo) {

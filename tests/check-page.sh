@@ -12,7 +12,7 @@ sleep 1
 fail=0
 dump() { "$CHROME" --headless=new --disable-gpu --virtual-time-budget=8000 --window-size=1100,1400 "$@" 2>/dev/null; }
 
-for name in ${@:-covid pfs pfs-rm brca fallback phone}; do
+for name in ${@:-covid pfs pfs-rm fallback phone}; do
   suite=${name%-rm}; flags=()
   [ "$name" != "$suite" ] && flags=(--force-prefers-reduced-motion)
   out=$(dump ${flags[@]+"${flags[@]}"} --dump-dom "http://127.0.0.1:$PORT/tests/harness.html?suite=$suite" | python3 -I -c '
