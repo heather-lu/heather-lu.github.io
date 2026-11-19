@@ -30,7 +30,7 @@ cv_list <- function(resamp) {
   lapply(names(model_labels), function(id) {
     folds <- v[[paste0(id, "~RMSE")]]
     stopifnot(length(folds) == 10)
-    list(id = id, label = unname(model_labels[id]), mean = round(mean(folds), 4), folds = round(folds, 4))
+    list(id = id, label = unname(model_labels[id]), mean = mean(folds), folds = round(folds, 4))
   })
 }
 

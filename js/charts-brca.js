@@ -84,7 +84,7 @@ function renderKm(fig, data) {
     const name = view === "stage" ? `Stage ${grp.name}` : view === "her2" ? `HER2 ${grp.name.toLowerCase()}` : "All patients";
     tip.show(`<strong>${name}</strong><br>Day ${Math.round(pt[0])}<br>Survival ${pt[1].toFixed(2)}`, clientX, clientY);
   }
-  root.addEventListener("pointermove", (ev) => {
+  for (const evName of ["pointermove", "pointerdown"]) root.addEventListener(evName, (ev) => {
     const r = root.getBoundingClientRect();
     const t = x.invert(((ev.clientX - r.left) / r.width) * W - M.l);
     if (t < 0) return;

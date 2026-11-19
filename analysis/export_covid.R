@@ -40,7 +40,7 @@ model_out <- lapply(models, function(m) {
   folds <- m$fit$resample$ROC
   stopifnot(length(folds) == 10)
   list(id = m$id, label = m$label, test_auc = m$auc,  # published value (see SVM note above)
-       roc = roc_points(m$roc), cv_auc = round(folds, 4), cv_auc_mean = round(mean(folds), 4))
+       roc = roc_points(m$roc), cv_auc = round(folds, 4), cv_auc_mean = mean(folds))
 })
 
 # Relative influence from the selected AdaBoost model

@@ -8,6 +8,7 @@ const press = (root, sel) => root.querySelector(sel).click();
 
 const suites = {
   async covid() {
+    let tip0;
     const { renderCovid } = await import("../js/charts-covid.js");
     const data = await (await fetch("../data/covid.json")).json();
     const m = { roc: mount("covid-roc"), cv: mount("covid-cv"), imp: mount("covid-imp"), pdp: mount("covid-pdp") };
@@ -28,6 +29,13 @@ const suites = {
     check("roc: arrow key shows a point readout", !!tip && !tip.hidden && /sensitivity/i.test(tip.textContent), tip && tip.textContent);
     const cvDots = m.cv.querySelectorAll("circle.fold");
     check("cv: 40 fold dots", cvDots.length === 40, cvDots.length);
+    const treeRow = [...m.cv.querySelectorAll("g.datum")].find((g) => /Decision tree/.test(g.getAttribute("aria-label")));
+    check("cv: tree mean shows published 0.833 (no double rounding)", /mean CV AUC 0\.833/.test(treeRow.getAttribute("aria-label")), treeRow.getAttribute("aria-label"));
+    const treeD = m.roc.querySelector('path.curve[data-id="rpart"]').getAttribute("d");
+    check("roc: tied scores drawn as diagonals, like pROC", !/[HV]/.test(treeD) && /L/.test(treeD), treeD.slice(0, 40));
+    tip0 = document.querySelector(".chart-tip");
+    m.roc.querySelector("svg").dispatchEvent(new PointerEvent("pointerdown", { clientX: m.roc.querySelector("svg").getBoundingClientRect().left + 120, clientY: 300, bubbles: true }));
+    check("roc: a tap (pointerdown, no move) shows a readout", !!tip0 && !tip0.hidden && /Sensitivity/.test(tip0.textContent));
     check("imp: top 8 bars + 1 combined", m.imp.querySelectorAll(".bar").length === 9, m.imp.querySelectorAll(".bar").length);
     check("imp: table keeps every predictor", m.imp.querySelectorAll("table.chart-table tr").length === data.importance.length + 1);
     check("grid lines stay inside plots", [...document.querySelectorAll("#covid-roc line.grid, #covid-pdp line.grid")].every((l) => +l.getAttribute("x2") < 400));
@@ -47,6 +55,8 @@ const suites = {
     renderPfs(data, m);
     check("cv: 60 fold dots", m.cv.querySelectorAll("circle.fold").length === 60, m.cv.querySelectorAll("circle.fold").length);
     check("cv: lasso highlighted", m.cv.querySelectorAll("circle.fold.on").length === 10);
+    const gamRow = [...m.cv.querySelectorAll("g.datum")].find((g) => /^GAM/.test(g.getAttribute("aria-label")));
+    check("cv: GAM mean shows 0.706 (no double rounding)", /mean CV RMSE 0\.706/.test(gamRow.getAttribute("aria-label")), gamRow.getAttribute("aria-label"));
     const dots = m.coef.querySelectorAll("g.coef-row");
     check("coef: one row per term", dots.length === data.coef.length, dots.length);
     const zero = +m.coef.querySelector("line.zero").getAttribute("x1");
@@ -99,6 +109,12 @@ const suites = {
     check("km: HER2 has 2 curves in two blues", curves().length === 2 && m.km.querySelectorAll("path.curve.on").length === 1 && m.km.querySelectorAll("path.curve.on2").length === 1);
     check("km: HER2 hides the group picker", m.km.querySelectorAll(".choice-group button").length === 0);
     check("km: HER2 p-value shown", /p = 0\.97/.test(m.km.querySelector(".pval").textContent));
+    tabs[0].click();
+    const kmSvg = m.km.querySelector("svg");
+    const kr = kmSvg.getBoundingClientRect();
+    document.querySelector(".chart-tip").hidden = true;
+    kmSvg.dispatchEvent(new PointerEvent("pointerdown", { clientX: kr.left + kr.width / 2, clientY: kr.top + kr.height / 2, bubbles: true }));
+    check("km: a tap shows a readout", !document.querySelector(".chart-tip").hidden && /Survival/.test(document.querySelector(".chart-tip").textContent));
     check("auc: 5 split dots", m.auc.querySelectorAll("circle.mc").length === 5);
     check("auc: chance line", !!m.auc.querySelector("line.chance"));
     for (const [k, el] of Object.entries(m)) check(`${k}: has data table`, !!el.querySelector("table.chart-table"));

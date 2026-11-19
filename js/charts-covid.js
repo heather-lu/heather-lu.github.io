@@ -1,6 +1,6 @@
 // COVID-19 severity charts: ROC curves, cross-validation folds, variable importance,
 // partial dependence. Data: data/covid.json (see analysis/export_covid.R).
-import { scaleLinear, ticks, linePath, stepPath, nearestPoint, svg, text, tooltip,
+import { scaleLinear, ticks, linePath, nearestPoint, svg, text, tooltip,
          centerOf, dataTable, choiceGroup, tabGroup } from "./chartkit.js";
 import { title, caption, axisX, axisY, foldStrip } from "./charts-common.js";
 
@@ -23,7 +23,7 @@ function renderRoc(fig, data) {
   const curves = {};
   const ordered = [...data.models];
   for (const m of ordered) {
-    curves[m.id] = svg("path", { class: "curve", "data-id": m.id, d: stepPath(m.roc, x, y), "stroke-dasharray": DASH[m.id] });
+    curves[m.id] = svg("path", { class: "curve", "data-id": m.id, d: linePath(m.roc, x, y), "stroke-dasharray": DASH[m.id] });
     g.append(curves[m.id]);
   }
   const marker = svg("circle", { class: "cross", r: 5, visibility: "hidden" });
@@ -50,7 +50,7 @@ function renderRoc(fig, data) {
     const thr = pt[2] == null ? "" : `<br>Threshold ${pt[2].toFixed(2)}`;
     tip.show(`<strong>${model().label}</strong>${thr}<br>Sensitivity ${pt[1].toFixed(2)}<br>Specificity ${(1 - pt[0]).toFixed(2)}`, clientX, clientY);
   }
-  root.addEventListener("pointermove", (ev) => {
+  for (const evName of ["pointermove", "pointerdown"]) root.addEventListener(evName, (ev) => {
     const r = root.getBoundingClientRect();
     const fpr = x.invert(((ev.clientX - r.left) / r.width) * W - M.l);
     if (fpr < 0 || fpr > 1) return;
@@ -157,7 +157,7 @@ function renderPdp(fig, data) {
       current.hideMarker = () => marker.setAttribute("visibility", "hidden");
     }
   }
-  root.addEventListener("pointermove", (ev) => {
+  for (const evName of ["pointermove", "pointerdown"]) root.addEventListener(evName, (ev) => {
     if (current.kind !== "numeric") return;
     const r = root.getBoundingClientRect();
     current.readAt(current.xScale.invert(((ev.clientX - r.left) / r.width) * W - M.l), ev.clientX, ev.clientY);
