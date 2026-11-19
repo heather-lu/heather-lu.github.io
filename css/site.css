@@ -99,7 +99,9 @@ figure.chart svg { display: block; width: 100%; height: auto; overflow: visible;
 .chart .bar.on { fill: var(--hi); }
 .chart .hit { fill: transparent; }
 .chart g.datum:hover .dot, .chart g.datum:hover .bar { stroke: var(--ink); stroke-width: 1.5; }
-.chart-table { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+/* Screen-reader data tables. Tables ignore width:1px, so park them off-screen to the left (no page overflow). */
+.chart-table { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+figure.chart { position: relative; }
 
 .more { display: grid; gap: 1.5rem; margin-top: 1rem; }
 @media (min-width: 640px) { .more { grid-template-columns: 1fr 1fr; gap: 2.5rem; } }

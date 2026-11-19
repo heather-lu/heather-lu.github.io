@@ -103,6 +103,42 @@ const suites = {
     check("auc: chance line", !!m.auc.querySelector("line.chance"));
     for (const [k, el] of Object.entries(m)) check(`${k}: has data table`, !!el.querySelector("table.chart-table"));
   },
+  async fallback() {
+    // Recreate the page's chart mounts, make every data request fail, then run main.js.
+    const ids = ["covid-roc", "covid-cv", "covid-imp", "covid-pdp", "pfs-coef", "pfs-cv", "pfs-eval", "brca-km", "brca-auc"];
+    const art = document.createElement("article");
+    art.innerHTML = `<div class="project-links"><a href="https://github.com/heather-lu/x">Code</a></div>` +
+      ids.map((id) => `<figure class="chart" id="${id}" data-fallback="Summary for ${id}."></figure>`).join("");
+    document.getElementById("mounts").append(art);
+    window.fetch = () => Promise.reject(new TypeError("offline"));
+    await import("../js/main.js");
+    await new Promise((r) => setTimeout(r, 300));
+    const fb = art.querySelectorAll(".chart-fallback");
+    check("fallback: every chart shows a text summary", fb.length === ids.length, fb.length);
+    check("fallback: no empty chart boxes", [...art.querySelectorAll("figure.chart")].every((f) => f.textContent.trim().length > 0));
+    check("fallback: links to the analysis", [...fb].every((p) => p.querySelector("a[href*='github.com']")));
+  },
+  async phone() {
+    const f = document.createElement("iframe");
+    f.style.cssText = "width:375px;height:800px;border:0";
+    f.src = "../index.html";
+    document.body.append(f);
+    await new Promise((r) => f.addEventListener("load", r));
+    await new Promise((r) => setTimeout(r, 1500));
+    const d = f.contentDocument;
+    const wide = [...d.body.querySelectorAll("*")].filter((el) => el.getBoundingClientRect().right > 376)
+      .slice(0, 4).map((el) => `${el.tagName.toLowerCase()}${el.id ? "#" + el.id : ""}.${el.className?.baseVal ?? el.className}`);
+    check("phone: no horizontal scroll", d.documentElement.scrollWidth <= 375, `${d.documentElement.scrollWidth} ${wide.join(" ")}`);
+    const figs = [...d.querySelectorAll("figure.chart[id]")];
+    check("phone: all 9 charts rendered", figs.length === 9 && figs.every((x) => x.querySelector("svg")), figs.filter((x) => !x.querySelector("svg")).map((x) => x.id).join());
+    // A tooltip opened near the right edge stays inside the 375px viewport
+    const row = d.querySelector("#covid-cv g.datum");
+    row.dispatchEvent(new f.contentWindow.PointerEvent("pointermove", { clientX: 370, clientY: 200, bubbles: true }));
+    const tip = d.querySelector(".chart-tip");
+    const r = tip.getBoundingClientRect();
+    check("phone: tooltip stays on screen", !tip.hidden && r.right <= 375 && r.left >= 0, `${r.left}-${r.right}`);
+    check("phone: hero heading present", /Heather Lu/.test(d.querySelector("h1").textContent));
+  },
 };
 
 (suites[suite] ? suites[suite]() : Promise.reject(new Error(`unknown suite ${suite}`)))
