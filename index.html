@@ -47,7 +47,7 @@
   <h2 id="projects-h">Selected projects</h2>
   <p class="section-intro">Prediction and survival analysis in R. Each project includes code and a full write-up on GitHub.</p>
 
-  <article class="project lead">
+  <article class="project wide" id="covid">
     <div class="body">
       <h3>Predicting COVID-19 illness severity</h3>
       <p class="meta">Spring 2026, Columbia University, in R</p>
@@ -57,49 +57,12 @@
         <a href="https://github.com/heather-lu/covid-severity-prediction">Code and report on GitHub</a>
       </div>
     </div>
-    <figure class="chart">
-      <p class="chart-title">Test-set AUC by model</p>
-      <svg viewBox="0 0 300 168" role="img" aria-labelledby="covid-desc">
-        <desc id="covid-desc">Dot plot of test-set AUC: decision tree 0.896, logistic regression 0.911, AdaBoost 0.918, SVM radial 0.918.</desc>
-        <!-- x scale: 0.88 -> 128, 0.93 -> 280 ; 1 unit of 0.01 = 30.4px -->
-        <line class="grid" x1="128" y1="4" x2="128" y2="136"/>
-        <line class="grid" x1="158.4" y1="4" x2="158.4" y2="136"/>
-        <line class="grid" x1="188.8" y1="4" x2="188.8" y2="136"/>
-        <line class="grid" x1="219.2" y1="4" x2="219.2" y2="136"/>
-        <line class="grid" x1="249.6" y1="4" x2="249.6" y2="136"/>
-        <line class="grid" x1="280" y1="4" x2="280" y2="136"/>
-        <text x="128" y="154" text-anchor="middle">0.88</text>
-        <text x="188.8" y="154" text-anchor="middle">0.90</text>
-        <text x="249.6" y="154" text-anchor="middle">0.92</text>
-
-        <g class="datum"><title>Decision tree: AUC 0.896</title>
-          <rect class="hit" x="0" y="4" width="300" height="30"/>
-          <text x="0" y="23">Decision tree</text>
-          <circle class="dot" cx="176.6" cy="19" r="6"/>
-          <text class="val" x="188" y="23">0.896</text></g>
-        <g class="datum"><title>Logistic regression: AUC 0.911</title>
-          <rect class="hit" x="0" y="37" width="300" height="30"/>
-          <text x="0" y="56">Logistic regression</text>
-          <circle class="dot" cx="222.2" cy="52" r="6"/>
-          <text class="val" x="233" y="56">0.911</text></g>
-        <g class="datum"><title>AdaBoost (selected on cross-validated AUC): test AUC 0.918</title>
-          <rect class="hit" x="0" y="70" width="300" height="30"/>
-          <text x="0" y="89" style="fill:var(--ink);font-weight:600">AdaBoost</text>
-          <circle class="dot on" cx="243.5" cy="85" r="6"/>
-          <text class="val" x="254" y="89">0.918</text></g>
-        <g class="datum"><title>SVM, radial kernel: AUC 0.918</title>
-          <rect class="hit" x="0" y="103" width="300" height="30"/>
-          <text x="0" y="122">SVM (radial)</text>
-          <circle class="dot" cx="243.5" cy="118" r="6"/>
-          <text class="val" x="254" y="122">0.918</text></g>
-      </svg>
-      <figcaption>Held-out test set, n = 200. AdaBoost was selected on cross-validated AUC. The axis starts at 0.88.</figcaption>
-      <table class="chart-table"><caption>Test-set AUC by model</caption>
-        <tr><th>Model</th><th>AUC</th></tr>
-        <tr><td>Decision tree</td><td>0.896</td></tr><tr><td>Logistic regression</td><td>0.911</td></tr>
-        <tr><td>AdaBoost</td><td>0.918</td></tr><tr><td>SVM (radial)</td><td>0.918</td></tr>
-      </table>
-    </figure>
+    <div class="chart-grid">
+      <figure class="chart" id="covid-roc" data-fallback="Test AUC: AdaBoost 0.918, SVM 0.918, logistic regression 0.911, decision tree 0.896."></figure>
+      <figure class="chart" id="covid-pdp" data-fallback="Predicted risk of severe illness: 0.59 unvaccinated vs 0.14 vaccinated."></figure>
+      <figure class="chart" id="covid-imp" data-fallback="Vaccination status accounts for about 55% of AdaBoost's relative influence."></figure>
+      <figure class="chart" id="covid-cv" data-fallback="Mean 10-fold CV AUC: AdaBoost 0.868, logistic 0.861, SVM 0.859, decision tree 0.833."></figure>
+    </div>
   </article>
 
   <article class="project lead">
@@ -280,5 +243,6 @@
 </footer>
 
 </div>
+<script type="module" src="js/main.js"></script>
 </body>
 </html>

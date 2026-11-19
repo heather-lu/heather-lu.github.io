@@ -129,3 +129,43 @@ figure.chart svg { display: block; width: 100%; height: auto; overflow: visible;
 
 footer { border-top: 1px solid var(--rule); padding: 2.5rem 0 3.5rem; font-family: var(--sans); font-size: 0.9rem; color: var(--muted); }
 footer .contact-links { margin-top: 0; margin-bottom: 1rem; }
+
+/* Wide projects: text on top, chart grid below */
+.project.wide .body { max-width: var(--measure); }
+.chart-grid { display: grid; gap: 1.25rem; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 820px) { .chart-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Chart marks */
+.chart .curve { fill: none; stroke: var(--quiet); stroke-width: 1.5; }
+.chart .curve.on { stroke: var(--hi); stroke-width: 2.5; }
+.chart .ref { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; opacity: 0.6; }
+.chart .cross { fill: var(--hi); stroke: var(--panel); stroke-width: 2; }
+.chart .fold { fill: var(--quiet); stroke: var(--panel); stroke-width: 1.5; }
+.chart .fold.on { fill: var(--hi); }
+.chart .mean { stroke: var(--ink-2); stroke-width: 2; }
+.chart .mean.on { stroke: var(--ink); }
+.chart .pd-band { fill: var(--hi); opacity: 0.1; }
+.chart .stem { stroke: var(--hi); stroke-width: 2; opacity: 0.35; }
+.chart .axis-label { fill: var(--muted); font-size: 11px; }
+.chart .curve-label { font-size: 12px; }
+.chart g.datum { outline: none; }
+.chart g.datum:focus-visible .hit { fill: var(--rule); }
+.chart svg:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; border-radius: 4px; }
+
+/* Chart controls */
+.choice-group, .tab-group { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0 0 0.85rem; }
+.choice-group button, .tab-group button {
+  font: 500 0.78rem/1.2 var(--sans); color: var(--ink-2); background: var(--paper);
+  border: 1px solid var(--rule); border-radius: 999px; padding: 0.35rem 0.75rem; cursor: pointer;
+}
+.choice-group button:hover, .tab-group button:hover { border-color: var(--hi); color: var(--ink); }
+.choice-group button[aria-pressed="true"], .tab-group button[aria-selected="true"] {
+  background: var(--hi); border-color: var(--hi); color: var(--paper);
+}
+
+.chart-tip {
+  position: fixed; top: 0; left: 0; z-index: 10; pointer-events: none; max-width: 16rem;
+  background: var(--ink); color: var(--paper); font: 0.78rem/1.45 var(--sans);
+  padding: 0.45rem 0.6rem; border-radius: 4px; box-shadow: 0 2px 8px rgba(15, 36, 64, 0.18);
+}
+.chart-fallback { font-family: var(--sans); font-size: 0.9rem; color: var(--ink-2); margin: 0; }
