@@ -3,13 +3,7 @@
 source("analysis/common.R")
 
 src <- "analysis/_src/covid-severity-prediction/analysis"
-cache <- "analysis/_src/covid_env.rds"
-if (file.exists(cache)) {
-  e <- readRDS(cache)
-} else {
-  e <- run_rmd_code(file.path(src, "covid_severity.Rmd"), src)
-  saveRDS(e, cache)  # local only (gitignored); avoids refitting while iterating
-}
+e <- load_or_run(file.path(src, "covid_severity.Rmd"), src, "analysis/_src/covid_env.rds")
 
 models <- list(
   list(id = "glm",   label = "Logistic regression", fit = e$model.glm,   roc = e$roc.glm,   auc = 0.911),

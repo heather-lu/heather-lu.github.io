@@ -3,13 +3,7 @@
 source("analysis/common.R")
 
 src <- "analysis/_src/breast-cancer-pfs-prediction"
-cache <- "analysis/_src/pfs_env.rds"
-if (file.exists(cache)) {
-  e <- readRDS(cache)
-} else {
-  e <- run_rmd_code(file.path(src, "dsci_II_midterm.Rmd"), src)
-  saveRDS(e, cache)  # local only (gitignored)
-}
+e <- load_or_run(file.path(src, "dsci_II_midterm.Rmd"), src, "analysis/_src/pfs_env.rds")
 
 rmse <- function(pred, obs) sqrt(mean((pred - obs)^2))
 r2 <- function(pred, obs) cor(pred, obs)^2  # as in the report: squared correlation
