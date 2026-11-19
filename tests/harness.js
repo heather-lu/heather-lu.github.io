@@ -74,6 +74,35 @@ const suites = {
     const scale = sv.getBoundingClientRect().width / sv.viewBox.baseVal.width;
     check("coef: readable at phone width (scale >= 0.9)", scale >= 0.9, scale.toFixed(2));
   },
+  async brca() {
+    const { renderBrca } = await import("../js/charts-brca.js");
+    const data = await (await fetch("../data/brca.json")).json();
+    const m = { km: mount("brca-km"), auc: mount("brca-auc") };
+    renderBrca(data, m);
+    const tabs = m.km.querySelectorAll('[role="tab"]');
+    check("km: 3 tabs", tabs.length === 3, tabs.length);
+    const curves = () => m.km.querySelectorAll("path.curve");
+    check("km: overall has 1 curve", curves().length === 1, curves().length);
+    check("km: censor marks match data", m.km.querySelectorAll(".censor").length === data.km.overall.groups[0].censor.length);
+    check("km: no p-value for overall", !/p [=<]/.test(m.km.querySelector(".pval")?.textContent || ""));
+    tabs[1].click();
+    check("km: stage has 3 curves", curves().length === 3, curves().length);
+    check("km: stage emphasizes exactly one", m.km.querySelectorAll("path.curve.on").length === 1);
+    const pick = m.km.querySelectorAll(".choice-group button");
+    check("km: stage has a group picker", pick.length === 3, pick.length);
+    pick[0].click();
+    check("km: picking stage I emphasizes it", m.km.querySelector("path.curve.on")?.dataset.group === data.km.stage.groups[0].name);
+    check("km: stage p-value shown", /p = 0\.10/.test(m.km.querySelector(".pval").textContent), m.km.querySelector(".pval").textContent);
+    check("km: at-risk table has a row per group", m.km.querySelectorAll(".at-risk tr.group").length === 3);
+    tabs[1].dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }));
+    check("km: arrow key moves to HER2", tabs[2].getAttribute("aria-selected") === "true");
+    check("km: HER2 has 2 curves in two blues", curves().length === 2 && m.km.querySelectorAll("path.curve.on").length === 1 && m.km.querySelectorAll("path.curve.on2").length === 1);
+    check("km: HER2 hides the group picker", m.km.querySelectorAll(".choice-group button").length === 0);
+    check("km: HER2 p-value shown", /p = 0\.97/.test(m.km.querySelector(".pval").textContent));
+    check("auc: 5 split dots", m.auc.querySelectorAll("circle.mc").length === 5);
+    check("auc: chance line", !!m.auc.querySelector("line.chance"));
+    for (const [k, el] of Object.entries(m)) check(`${k}: has data table`, !!el.querySelector("table.chart-table"));
+  },
 };
 
 (suites[suite] ? suites[suite]() : Promise.reject(new Error(`unknown suite ${suite}`)))

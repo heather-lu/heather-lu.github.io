@@ -132,7 +132,7 @@ footer .contact-links { margin-top: 0; margin-bottom: 1rem; }
 
 /* Wide projects: text on top, chart grid below */
 .project.wide .body { max-width: var(--measure); }
-.chart-grid { display: grid; gap: 1.25rem; grid-template-columns: minmax(0, 1fr); }
+.chart-grid { display: grid; gap: 1.25rem; grid-template-columns: minmax(0, 1fr); align-items: start; }
 @media (min-width: 820px) { .chart-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 /* Chart marks */
@@ -179,3 +179,16 @@ footer .contact-links { margin-top: 0; margin-bottom: 1rem; }
 .chart .coef-dot.on { fill: var(--hi); }
 .chart .coef-dot, .chart .coef-ghost { transition: transform 600ms cubic-bezier(.3,.7,.3,1); }
 @media (prefers-reduced-motion: reduce) { .chart .coef-dot, .chart .coef-ghost { transition: none; } }
+
+/* Kaplan-Meier */
+.chart .curve.on2 { stroke: var(--hi-2); stroke-width: 2.5; }
+.chart .censor { stroke: var(--quiet); stroke-width: 1.5; }
+.chart .censor.on { stroke: var(--hi); }
+.chart .censor.on2 { stroke: var(--hi-2); }
+.chart .chance { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; }
+.at-risk-wrap { overflow-x: auto; margin: 0.25rem 0 0.75rem; }
+.at-risk { width: 100%; border-collapse: collapse; font: 0.75rem/1.4 var(--sans); color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.at-risk caption { text-align: left; font-weight: 600; color: var(--ink); padding-bottom: 0.2rem; }
+.at-risk th, .at-risk td { padding: 0.15rem 0.3rem; text-align: right; font-weight: 400; }
+.at-risk tr:first-of-type th { color: var(--muted); }
+.at-risk tr.group th { text-align: left; white-space: nowrap; }
